@@ -1,0 +1,9 @@
+# 忽略所有图片类型
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.ico
+*.svg
