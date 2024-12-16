@@ -27,7 +27,8 @@ def kmer_matches(seq1: str, seq2: str, k: int) -> int:
     matches = 0
     for kmer in kmer_count1:
         if kmer in kmer_count2:
-            matches += min(kmer_count1[kmer], kmer_count2[kmer])
+            # matches += min(kmer_count1[kmer], kmer_count2[kmer])
+            matches += kmer_count1[kmer] * kmer_count2[kmer]
     return matches
 
 # 4. calculating F(k) for different k values
@@ -36,21 +37,25 @@ def compute_F_k(seq1: str, seq2: str, k_values: List[int]) -> List[float]:
     F_k = []
     L_1 = len(seq1)
     L_2 = len(seq2)
-    L_min = min(L_1, L_2)  # minimum sequence length
+    # L_min = min(L_1, L_2)  # minimum sequence length
     q = 0.25  # assume equal frequency of each nucleotide, background match probability
+    epsilon = 1e-10
 
     for k in tqdm(k_values, desc="Calculating F(k) for different k values"):
         matches = kmer_matches(seq1, seq2, k)
 
         # calculate the number of background matches
-        background_matches = 2 * L_1 * L_2 * (q ** k)
+        background_matches = 2 * 2 * (L_1 - k + 1) * (L_2 - k + 1) * (q ** k)
 
         # generate F(k) value
-        if matches > background_matches:
-            F_k_value = np.log(matches - background_matches)
-            F_k.append(F_k_value)
-        else:
-            F_k.append(0)  # if matches <= background_matches, F(k) = 0
+        # if matches > background_matches:
+        #     F_k_value = np.log(matches - background_matches)
+        #     F_k.append(F_k_value)
+        # else:
+        #     F_k.append(0)  # if matches <= background_matches, F(k) = 0
+        F_k_value = np.log(max(matches - background_matches, epsilon))
+        F_k.append(F_k_value)
+
 
     return F_k
 
