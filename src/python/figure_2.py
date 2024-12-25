@@ -45,7 +45,8 @@ def compute_F_k(seq1: str, seq2: str, k_values: List[int]) -> List[float]:
         matches = kmer_matches(seq1, seq2, k)
 
         # calculate the number of background matches
-        background_matches = 2 * 2 * (L_1 - k + 1) * (L_2 - k + 1) * (q ** k)
+        # background_matches = 2 * 2 * (L_1 - k + 1) * (L_2 - k + 1) * (q ** k)
+        background_matches = (L_1 - k + 1) * (L_2 - k + 1) * (q ** k)
 
         # generate F(k) value
         # if matches > background_matches:
@@ -86,7 +87,7 @@ def main():
     seq2 = sequences[1]
 
     # define k values range
-    k_values = list(range(0, 25))  # k_min = 10, k_max = 24 in paper
+    k_values = list(range(1, 25))  # k_min = 10, k_max = 24 in paper
 
     # calculate F(k) for different k values
     F_k = compute_F_k(seq1, seq2, k_values)
