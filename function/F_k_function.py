@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 from utils.file_system import load_sequences
-from methods.kmer_matches import *
+from methods.kmer_methods import *
 
 class FKFuntion():
     """
