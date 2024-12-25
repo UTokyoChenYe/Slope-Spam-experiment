@@ -1,0 +1,14 @@
+data_path: "../dataset/test.fasta"
+
+k_mers_method_valid_list:
+  - "basic_kmer_matches"
+
+# basci k-mers method parameters
+k_mers_min: 1
+k_mers_max: 25
+
+# F_k funtion parameters
+log_epsilon: 1.0e-6
+
+# 
+figure_root_path: "../figure/"

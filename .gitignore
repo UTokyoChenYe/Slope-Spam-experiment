@@ -1,5 +1,5 @@
 # 忽略所有图片类型
-*.png
+# *.png
 *.jpg
 *.jpeg
 *.gif
